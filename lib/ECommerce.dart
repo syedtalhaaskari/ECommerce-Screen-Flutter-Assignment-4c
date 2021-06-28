@@ -165,21 +165,24 @@ class _ECommerceState extends State<ECommerce> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Items",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Items",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Text(
-                    "View More",
-                    style: TextStyle(fontSize: 16, color: Colors.purple),
-                  ),
-                ],
+                    Text(
+                      "View More",
+                      style: TextStyle(fontSize: 16, color: Colors.purple),
+                    ),
+                  ],
+                ),
               ),
               CarouselSlider(
                   items: items.map((item) {
@@ -200,13 +203,16 @@ class _ECommerceState extends State<ECommerce> {
                     enlargeCenterPage: true,
                     scrollDirection: Axis.horizontal,
                   )),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "More Categories",
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "More Categories",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
@@ -229,21 +235,24 @@ class _ECommerceState extends State<ECommerce> {
                     enlargeCenterPage: false,
                     scrollDirection: Axis.horizontal,
                   )),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Popular Items",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Popular Items",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Text(
-                    "View More",
-                    style: TextStyle(fontSize: 16, color: Colors.purple),
-                  ),
-                ],
+                    Text(
+                      "View More",
+                      style: TextStyle(fontSize: 16, color: Colors.purple),
+                    ),
+                  ],
+                ),
               ),
               GridView.count(
                   shrinkWrap: true,
@@ -252,11 +261,12 @@ class _ECommerceState extends State<ECommerce> {
                   // horizontal, this produces 2 rows.
                   crossAxisCount: 2,
                   // Generate 100 widgets that display their index in the List.
-                  children:  List.generate(items.length, (index) {
-                        return popularProduct(items[index]);
-                      },
-                    )
-                  ),
+                  children: List.generate(
+                    items.length,
+                    (index) {
+                      return popularProduct(items[index]);
+                    },
+                  )),
             ],
           ),
         ),
@@ -419,79 +429,73 @@ Widget categories(data) {
 
 Widget popularProduct(data) {
   return Container(
-      width: data['width'],
-      height: 600,
-      margin: EdgeInsets.symmetric(
-        vertical: 10,
-      ),
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: data['width'],
-                maxHeight: 200,
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image(
-                  width: 200,
-                  height: 200,
-                  image: AssetImage('assets/${data["img"]}.jpg'),
-                  fit: BoxFit.fill,
+    width: data['width'],
+    height: 600,
+    margin: EdgeInsets.symmetric(
+      vertical: 10,
+    ),
+    child: Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image(
+              width: 150,
+              height: 150,
+              image: AssetImage('assets/${data["img"]}.jpg'),
+              fit: BoxFit.fill,
+            ),
+          ),
+          Flexible(
+            child: ListTile(
+              title: Text(
+                data['name'],
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
                 ),
+              ),
+              subtitle: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Row(children: [
+                      Icon(
+                        Icons.star,
+                        color: Colors.yellow[600],
+                        size: 14,
+                      ),
+                      Icon(
+                        Icons.star,
+                        color: Colors.yellow[600],
+                        size: 14,
+                      ),
+                      Icon(
+                        Icons.star,
+                        color: Colors.yellow[600],
+                        size: 14,
+                      ),
+                      Icon(
+                        Icons.star,
+                        color: Colors.yellow[600],
+                        size: 14,
+                      ),
+                      Icon(
+                        Icons.star,
+                        color: Colors.yellow[600],
+                        size: 14,
+                      ),
+                      Text(" ${data['ratings']} (${data['reviews']} Review)"),
+                    ]),
+                  ),
+                ],
               ),
             ),
-            Flexible(
-              child: ListTile(
-                title: Text(
-                  data['name'],
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 26,
-                  ),
-                ),
-                subtitle: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Row(children: [
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow[600],
-                          size: 14,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow[600],
-                          size: 14,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow[600],
-                          size: 14,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow[600],
-                          size: 14,
-                        ),
-                        Icon(
-                          Icons.star,
-                          color: Colors.yellow[600],
-                          size: 14,
-                        ),
-                        Text(" ${data['ratings']} (${data['reviews']} Review)"),
-                      ]),
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
-    );
+    ),
+  );
 }
